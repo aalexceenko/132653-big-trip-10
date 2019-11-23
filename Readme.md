@@ -1,7 +1,7 @@
 # Личный проект «Большое путешествие» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анастасия Алексеенко](https://up.htmlacademy.ru/ecmascript/10/user/132653).
-* Наставник: `Неизвестно`.
+* Наставник: [Вадим Вильданов](https://htmlacademy.ru/profile/id1210315).
 
 ---
 
