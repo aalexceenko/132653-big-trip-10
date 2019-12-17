@@ -1,5 +1,5 @@
-import {EVENT_TYPES, CITIES, OFFERS, DESCRIPTIONS, EVENTS_COUNT} from '../const.js';
-import {getRandomIntegerNumber, generateRandomArrayItem, formatTime} from '../utils.js';
+import {EVENT_TYPES, CITIES, OFFERS, DESCRIPTIONS} from '../const.js';
+import {getRandomIntegerNumber, generateRandomArrayItem} from '../utils.js';
 
 const generateDescriptions = (array) => {
   const arrayLength = getRandomIntegerNumber(0, array.length);
@@ -17,10 +17,11 @@ const generatePhotos = () => {
 
 const generateOffers = (array) => {
   const restArray = array.slice();
-  const countArray = getRandomIntegerNumber(1, restArray.length);
+  const resultArrayLength = getRandomIntegerNumber(1, restArray.length);
   const result = [];
-  for (let i = 0; i < countArray; i++) {
-    result.push(restArray.splice(getRandomIntegerNumber(0, restArray.length - 1), 1));
+
+  for (let i = 0; i < resultArrayLength; i++) {
+    result.push(...restArray.slice(getRandomIntegerNumber(0, restArray.length - 1), 1));
   }
 
   return result;
@@ -39,8 +40,8 @@ const getRandomDate = () => {
 
 
 const generateEvent = () => {
-  const firstDate = Math.random() > 0.5 ? null : getRandomDate();
-  const secondDate = Math.random() > 0.5 ? null : getRandomDate();
+  const firstDate = getRandomDate();
+  const secondDate = getRandomDate();
 
 
   return {
@@ -61,7 +62,6 @@ const generateEvents = (count) => {
     .map(generateEvent);
 };
 
-// const events = generateEvents(EVENTS_COUNT);
 export {generateEvent, generateEvents};
 
 

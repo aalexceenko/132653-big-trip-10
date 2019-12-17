@@ -1,12 +1,11 @@
-import {formatTime, formatDuration, replaceElement, createElement} from '../utils.js';
+import {formatTime, formatDuration} from '../utils.js';
 
 
-const OFFERS_MAX_VIEWING = 3;
+// const OFFERS_MAX_VIEWING = 3;
 
 
 const createOffersMarkup = (offers) => {
   return offers
-    .slice(OFFERS_MAX_VIEWING)
     .map((offer) => {
       const {title, price} = offer;
       return `
@@ -20,7 +19,7 @@ const createOffersMarkup = (offers) => {
     .join(``);
 };
 
-const createEventListItemTemplate = () => {
+const createEventListItemTemplate = (event) => {
   const {type, city, offers, startDate, endDate, price} = event;
 
   const offersMarkup = createOffersMarkup(offers);
