@@ -1,9 +1,6 @@
 import {formatTime, formatDuration} from '../utils.js';
 
 
-// const OFFERS_MAX_VIEWING = 3;
-
-
 const createOffersMarkup = (offers) => {
   return offers
     .map((offer) => {

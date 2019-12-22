@@ -1,7 +1,7 @@
 import {EVENT_TYPES, CITIES, OFFERS, DESCRIPTIONS} from '../const.js';
-import {getRandomIntegerNumber, generateRandomArrayItem} from '../utils.js';
+import {getRandomIntegerNumber, getRandomArrayItem} from '../utils.js';
 
-const generateDescriptions = (array) => {
+const generateDescription = (array) => {
   const arrayLength = getRandomIntegerNumber(0, array.length);
 
   return array.slice(0, arrayLength).join(` `);
@@ -21,37 +21,44 @@ const generateOffers = (array) => {
   const result = [];
 
   for (let i = 0; i < resultArrayLength; i++) {
-    result.push(...restArray.slice(getRandomIntegerNumber(0, restArray.length - 1), 1));
+    result.push(getRandomArrayItem(restArray));
   }
 
-  return result;
+  return result.slice(0, 2);
 };
+
 
 const getRandomDate = () => {
   const targetDate = new Date();
   const sign = Math.random() > 0.5 ? 1 : -1;
-  const diffValue = sign * getRandomIntegerNumber(0, 7);
+  const diffDateValue = sign * getRandomIntegerNumber(0, 2);
+  const diffHoursValue = sign * getRandomIntegerNumber(0, 24);
+  const diffMinutesValue = sign * getRandomIntegerNumber(0, 60);
 
-  targetDate.setDate(targetDate.getDate() + diffValue);
+  targetDate.setDate(targetDate.getDate() + diffDateValue);
+  targetDate.setHours(targetDate.getHours() + diffHoursValue);
+  targetDate.setMinutes(targetDate.getMinutes() + diffMinutesValue);
 
   return targetDate;
-
 };
 
 
 const generateEvent = () => {
-  const firstDate = getRandomDate();
-  const secondDate = getRandomDate();
+
+  const firstRandomDate = getRandomDate();
+  const secondRandomDate = getRandomDate();
+  const startDate = (firstRandomDate < secondRandomDate) ? firstRandomDate : secondRandomDate;
+  const endDate = (firstRandomDate > secondRandomDate) ? firstRandomDate : secondRandomDate;
 
 
   return {
-    type: generateRandomArrayItem([...EVENT_TYPES.transfers, ...EVENT_TYPES.activities]),
-    city: generateRandomArrayItem(CITIES),
-    startDate: Math.min(firstDate, secondDate),
-    endDate: Math.max(firstDate, secondDate),
+    type: getRandomArrayItem([...EVENT_TYPES.transfers, ...EVENT_TYPES.activities]),
+    city: getRandomArrayItem(CITIES),
+    startDate,
+    endDate,
     offers: generateOffers(OFFERS),
     price: getRandomIntegerNumber(10, 200),
-    description: generateDescriptions(DESCRIPTIONS),
+    description: generateDescription(DESCRIPTIONS),
     photos: generatePhotos()
   };
 };

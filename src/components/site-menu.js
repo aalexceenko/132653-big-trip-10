@@ -4,3 +4,4 @@ export const createSiteMenuTemplate = () => (
     <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Stats</a>
   </nav>`
 );
+

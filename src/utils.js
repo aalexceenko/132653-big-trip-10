@@ -2,7 +2,7 @@ const getRandomIntegerNumber = (min, max) => {
   return Math.floor(min + Math.random() * (max - min + 1));
 };
 
-const generateRandomArrayItem = (array) => {
+const getRandomArrayItem = (array) => {
   return array[getRandomIntegerNumber(0, array.length - 1)];
 };
 
@@ -38,4 +38,4 @@ const formatDuration = (time) => {
 
   return `${hours > 0 ? `${hours}H` : ``} ${minutes}M`;
 };
-export {generateRandomArrayItem, getRandomIntegerNumber, formatTime, formatDate, formatDuration};
+export {getRandomArrayItem, getRandomIntegerNumber, formatTime, formatDate, formatDuration};
